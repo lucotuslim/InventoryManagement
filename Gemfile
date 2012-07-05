@@ -11,3 +11,11 @@ gem "haml", ">= 3.1.6"
 gem "haml-rails", ">= 0.3.4", :group => :development
 gem "bootstrap-sass", ">= 2.0.3"
 gem "will_paginate", ">= 3.0.3"
+gem 'annotate', '~> 2.4.1.beta', group: :development
+
+gem 'bcrypt-ruby', '3.0.1'
+
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+end
+
