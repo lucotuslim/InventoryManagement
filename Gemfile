@@ -16,6 +16,8 @@ gem 'annotate', '~> 2.4.1.beta', group: :development
 gem 'bcrypt-ruby', '3.0.1'
 
 group :test, :development do
+  gem 'factory_girl_rails', '1.4.0'
   gem "rspec-rails", "~> 2.0"
+  gem 'capybara', '1.1.2'
 end
 
