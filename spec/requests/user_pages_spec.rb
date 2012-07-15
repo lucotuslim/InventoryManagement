@@ -89,10 +89,11 @@ describe "User pages" do
        describe "after saving user" do
         before { click_button submit }
         let(:user) { User.find_by_email('xxx@example.com') }
+        it { should_not have_selector('title', text: user.name) }
+        it { should_not have_selector('div.alert.alert-success', text: 'Welcome') }
+#        it { should_not have_link('Sign out', href: signout_path) }
+        #it { should_not have_link('Sign in', href: signin_path)  }
 
-        it { should have_selector('title', text: user.name) }
-        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
-        it {should have_link('Sign out') }
        end
     end
 

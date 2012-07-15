@@ -42,9 +42,10 @@ class UsersController < ApplicationController
   def create 
    @user = User.new(params[:user])
    if @user.save
-    sign_in @user
-    flash[:success] = "Welcome to Inventory Management!!"
-    redirect_to @user
+    #sign_in @user
+    flash[:success] = "Successfully create account, but need admin to approve"
+    #redirect_to @user
+    redirect_to root_path
    else
      render 'new'
    end

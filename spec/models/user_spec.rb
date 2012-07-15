@@ -19,6 +19,9 @@ activate_authlogic
 # it { should respond_to(:remember_token) }
  it { should be_valid } 
  it { should_not be_admin} 
+ describe "admin should be null first" do
+  it { should_not be_admin }
+ end
  describe "with admin attribute set to true" do
    before {@user.toggle!(:admin)}
    it { should be_admin}
