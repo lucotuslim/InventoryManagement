@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:index,:edit, :update,:destroy]
+  skip_before_filter :require_user, :only => [:create,:new]
+
+#  before_filter :signed_in_user, only: [:index,:edit, :update,:destroy]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user , only: :destroy
-  def show
+
+ 
+   def show
     @user = User.find(params[:id])
   end
 
@@ -47,19 +51,19 @@ class UsersController < ApplicationController
   end
 
  private 
-    def signed_in_user
-     unless signed_in? 
-      store_location
-      redirect_to signin_path, notice: "Please sign in." unless signed_in?
-     end
-    end
+#    def signed_in_user
+#     unless signed_in? 
+#      store_location
+#      redirect_to signin_path, notice: "Please sign in." unless signed_in?
+#     end
+#    end
 
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
+        redirect_to(root_path) unless current_user == @user
     end
   
   def admin_user
-    redirect_to(root_path) unless current_user.admin?
+   redirect_to(root_path) unless current_user.admin?
   end
 end

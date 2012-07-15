@@ -1,20 +1,45 @@
 module SessionsHelper
+
+def deny_access(msg = nil)
+  msg ||= "Please sign in to access this page."
+  flash[:notice] ||= msg
+  respond_to do |format|
+    format.html {
+      store_location
+      redirect_to signin_url
+    }
+    format.js {
+      store_location request.referer
+      render 'sessions/redirect_to_login', :layout=>false
+    }
+  end
+end
+
+#  def sign_in(user)
+#    cookies.permanent[:remember_token] = user.remember_token
+#    current_user = user
+#  end
+
+#  def signed_in?
+#    !current_user.nil?
+#  end
   def sign_in(user)
-    cookies.permanent[:remember_token] = user.remember_token
-    current_user = user
+    @user_session = UserSession.new(user)
+    @user_session.save
+#    current_user = user
   end
 
   def signed_in?
     !current_user.nil?
   end
 
-  def current_user
-    @current_user ||= User.find_by_remember_token(cookies[:remember_token])
-  end
+#  def current_user
+#    @current_user ||= User.find_by_remember_token(cookies[:remember_token])
+#  end
 
-  def current_user?(user)
-    user == current_user
-  end
+#  def current_user?(user)
+#    user == current_user
+#  end
 
   def signed_in_user
     unless signed_in?

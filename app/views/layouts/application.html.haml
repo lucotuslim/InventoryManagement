@@ -1,4 +1,10 @@
 !!!
+-if @session_time_left
+  :javascript
+    $(function() {
+      setSessionTimeout('#{check_session_alive_sessions_path}', #{@session_time_left})
+    });
+
 %html
   %head
     %meta{:charset => "utf-8"}

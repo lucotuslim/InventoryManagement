@@ -1,5 +1,5 @@
 <div class="container">
-      <%= link_to "Inventory Management", root_path, id: "logo" %>
+      <%= link_to "Inventory Management " , root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
@@ -7,8 +7,8 @@
             <li><%= link_to "Users", users_path %></li>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Account <b class="caret"></b>
-              </a>
+	<%= current_user.name if !current_user.nil? %> <b class="caret"></b>
+		      </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Profile", current_user %></li>
                  <li><%= link_to "Settings", edit_user_path(current_user) %></li>

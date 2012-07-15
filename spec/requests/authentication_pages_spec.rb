@@ -42,16 +42,7 @@ describe "Authentication" do
  end
  
  describe "authorization" do
-  describe "as non-admin user" do
-   let(:user) {FactoryGirl.create(:user)}
-   let(:non_admin) {FactoryGirl.create(:user)}
-   before {sign_in non_admin}
-    describe "submit delete request " do
-    before {delete user_path(user) }
-    specify {response.should redirect_to(root_path)}
-    end
-  end
-
+  
   describe "for non-signin users" do
    let(:user) {FactoryGirl.create(:user)}
 
@@ -96,10 +87,7 @@ describe "Authentication" do
     before {visit edit_user_path(wrong_user)}
     it { should_not have_selector('title',text: "Edit user") }
    end
-   describe "submitting a PUT request to Users#update action" do
-     before {put user_path(wrong_user)}
-     specify {response.should redirect_to(root_path)}
-   end
  end
  end
 end
+
