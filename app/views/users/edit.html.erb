@@ -12,6 +12,11 @@
       <%= f.label :email %>
       <%= f.text_field :email %>
 
+  <% if current_user.admin? %>
+      <%= f.label :admin %>
+      <%= f.select :admin, [['No role',nil],['Admin',true],['Normal' ,false]] %>
+   <% end %> 
+
       <%= f.label :password %>
       <%= f.password_field :password %>
 

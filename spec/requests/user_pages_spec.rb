@@ -4,11 +4,11 @@ describe "User pages" do
  
  subject { page }
  describe "index" do
-   let(:user) {FactoryGirl.create(:user)}
-   before(:all) { 30.times { FactoryGirl.create(:user) } }
+   let(:admin) {FactoryGirl.create(:admin)}
+   before(:all) { 30.times { FactoryGirl.create(:admin) } }
    after(:all) {User.delete_all}
    before(:each) do
-    sign_in user
+    sign_in admin 
     visit users_path
    end
 
@@ -19,14 +19,14 @@ describe "User pages" do
    it {should have_selector('div.pagination')}
    it "should list each user" do
     User.paginate(page: 1).each do |user|
-    page.should have_selector('li',text:user.name)
+    page.should have_selector('li',text:admin.name)
     end 
    end
   end
 
    describe "delete links" do
 
-      it { should_not have_link('delete') }
+      it { should have_link('delete') }
 
       describe "as an admin user" do
         let(:admin) { FactoryGirl.create(:admin) }

@@ -2,9 +2,9 @@ class UsersController < ApplicationController
   skip_before_filter :require_user, :only => [:create,:new]
 
 #  before_filter :signed_in_user, only: [:index,:edit, :update,:destroy]
-  before_filter :correct_user,   only: [:edit, :update]
-  before_filter :admin_user , only: :destroy
-
+#  before_filter :correct_user,   only: [:edit, :update]
+  before_filter :admin_or_current_user , :only => [:edit, :update,:destroy]
+  before_filter :admin_user , :only => :index
  
    def show
     @user = User.find(params[:id])
@@ -59,12 +59,19 @@ class UsersController < ApplicationController
 #     end
 #    end
 
+   def admin_or_current_user
+     unless correct_user || admin_user  
+        flash[:notice] = "You need to be admin in order to edit other user"
+        redirect_to(root_path)
+     end
+   end
+
     def correct_user
       @user = User.find(params[:id])
-        redirect_to(root_path) unless current_user == @user
+      current_user == @user
     end
   
   def admin_user
-   redirect_to(root_path) unless current_user.admin?
+    current_user.admin?
   end
 end

@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation, :admin
 #  has_secure_password
 
-   default_scope :conditions => 'admin is not null' 
+#   default_scope :conditions => 'admin is not null' 
 
    acts_as_authentic do | config |
-    config.logged_in_timeout = 15.seconds
+    config.logged_in_timeout = 2.minutes
    end
 
 
