@@ -5,7 +5,8 @@
     <section>
       <h1>
         <%= gravatar_for @user %>
-        <%= @user.name %>
+        <%= @user.name %>  <br />
+        <%= @user.admin?  ? 'Admin User' : 'Normal User' %>
       </h1>
     </section>
   </aside>
