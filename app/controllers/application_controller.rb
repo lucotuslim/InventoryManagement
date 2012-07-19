@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_user
 
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :require_user
 
   private
     def current_user_session
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
     def require_user
       logger.debug "ApplicationController::require_user"
-      unless current_user
+      unless current_user and !@current_user.admin.nil?
         store_location
         flash[:notice] = "You must be logged in to access this page"
         redirect_to signin_path

@@ -1,5 +1,21 @@
 <% provide(:title, 'All users') %>
+
+     <%= form_for @search do |f| %>
+      <p>
+        <%= f.label :name_contains %>
+        <%= f.text_field :name_contains, :size => 20 %>
+      </p>
+
+      <p>
+        <%= f.label :admin_is_null  %>
+        <%= f.check_box :admin_is_null  %>
+      </p>
+
+      <p class="button"><%= f.submit "Search" %></p>
+    <% end %>  
+
 <h1>All users</h1>
+
 <%= will_paginate %>
 <ul class="users">
   <%= render @users %>
