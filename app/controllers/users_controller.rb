@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     @user=User.find(params[:id])
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated"
-      sign_in @user
+#      sign_in @user
       redirect_to @user
     else
     render 'edit'
@@ -61,7 +61,8 @@ class UsersController < ApplicationController
 #    end
 
    def admin_or_current_user
-     unless correct_user || admin_user  
+      @user = User.find(params[:id])
+     unless current_user == @user || current_user.admin   
         flash[:notice] = "You need to be admin in order to edit other user"
         redirect_to(root_path)
      end
@@ -73,6 +74,9 @@ class UsersController < ApplicationController
     end
   
   def admin_user
-    current_user.admin?
+    unless current_user.admin
+       flash[:notice] = "You need to be admin in order to edit other user"
+       redirect_to(root_path)
+    end
   end
 end

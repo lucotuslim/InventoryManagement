@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 #   default_scope :conditions => 'admin is not null' 
 
    acts_as_authentic do | config |
-    config.logged_in_timeout = 2.minutes
+    config.logged_in_timeout = 5.minutes
    end
 
 

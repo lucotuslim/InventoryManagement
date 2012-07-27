@@ -21,7 +21,8 @@ class ApplicationController < ActionController::Base
 
     def require_user
       logger.debug "ApplicationController::require_user"
-      unless current_user and !@current_user.admin.nil?
+#      unless current_user and !@current_user.admin.nil?
+        unless current_user 
         store_location
         flash[:notice] = "You must be logged in to access this page"
         redirect_to signin_path
