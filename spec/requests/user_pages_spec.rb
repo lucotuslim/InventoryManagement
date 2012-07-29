@@ -12,8 +12,8 @@ describe "User pages" do
     visit users_path
    end
 
-   it {should have_selector('title',text:'All users')}
-   it {should have_selector('h1',text: 'All users')}
+   it {should have_selector('title',text:'Users listing')}
+   it {should have_selector('h1',text: 'Users listin')}
 
   describe "pagination" do
    it {should have_selector('div.pagination')}
@@ -112,9 +112,9 @@ describe "User pages" do
   it {should have_link('change',href: 'http://gravatar.com/emails') }
   end
    
-  describe "with invalid information" do
+  describe "with default information" do
     before {click_button "Save changes" }
-    it {should have_content('error') }
+    it {should_not have_content('error') }
   end
   describe "with valid information" do
    let(:new_name) {"New Name" }

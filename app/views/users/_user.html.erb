@@ -1,8 +1,8 @@
-<li>
+<li id="<%= dom_id user %>" > 
   <%= gravatar_for user, size: 52 %>
   <%= link_to user.name, user %>
   <%= user.admin?  ? 'Admin User' : 'Normal User' %>
     | <%= link_to "edit", edit_user_path(user) %>
-    | <%= link_to "delete", user, method: :delete,
+    | <%= link_to "delete", user, method: :delete,:remote => true,
                                   data: { confirm: "You sure?" } %>
 </li>

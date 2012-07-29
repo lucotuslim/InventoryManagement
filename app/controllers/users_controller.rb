@@ -11,9 +11,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
+
     User.find(params[:id]).destroy
     flash[:success]="User destroyed."
-    redirect_to users_path
+
+    respond_to do |format|
+      format.html { redirect_to(users_url) }
+      format.js
+    end
+
   end
 
   def index
@@ -31,6 +37,9 @@ class UsersController < ApplicationController
  
   def update
     @user=User.find(params[:id])
+    if !params[:user][:password]==''
+         @user.updating_password = true
+    end
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated"
 #      sign_in @user
@@ -41,7 +50,8 @@ class UsersController < ApplicationController
   end
 
   def create 
-   @user = User.new(params[:user])
+   @user = User.new(params[:user]) 
+   @user.updating_password = true
    if @user.save
     #sign_in @user
     flash[:success] = "Successfully create account, but need admin to approve"

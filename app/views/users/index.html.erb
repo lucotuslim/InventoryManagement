@@ -1,23 +1,28 @@
-<% provide(:title, 'All users') %>
+<% provide(:title, 'Users listing') %>
 
-     <%= form_for @search do |f| %>
-      <p>
+<%= link_to_function "Search", "$('#search').toggle()"  %>
+
+<div id=search style="display: none;" >
+
+     <%= form_for(@search) do |f| %>
+      <p class="search">
         <%= f.label :name_contains %>
         <%= f.text_field :name_contains, :size => 20 %>
       </p>
 
-      <p>
+      <p class="search">
         <%= f.label :admin_is_null  %>
         <%= f.check_box :admin_is_null  %>
       </p>
 
       <p class="button"><%= f.submit "Search" %></p>
     <% end %>  
+</div>
 
-<h1>All users</h1>
+<h1>Users listing</h1>
 
 <%= will_paginate %>
-<ul class="users">
+<ul class="users" id="users">
   <%= render @users %>
 </ul>
 <%= will_paginate %>
