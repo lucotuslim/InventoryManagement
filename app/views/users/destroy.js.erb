@@ -1,2 +1,6 @@
+
+$('#<%= dom_id(@user) %>').html("<%= escape_javascript('Destroying User ' + @user.name) %>");
 $('#<%= dom_id(@user) %>').css('background', 'red');
-$('#<%= dom_id @user %>').fadeOut('slow');
+$('#<%= dom_id @user %>').fadeOut(5000);
+
+

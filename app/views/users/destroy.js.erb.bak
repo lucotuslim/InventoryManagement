@@ -1,0 +1,7 @@
+$('#flash-notice').html("<%= escape_javascript(render('layouts/messages')) %>");
+$("#flash-notice").fadeIn();
+$("#flash-notice").fadeOut('slow');
+$('#<%= dom_id(@user) %>').css('background', 'red');
+$('#<%= dom_id @user %>').fadeOut('slow');
+
+

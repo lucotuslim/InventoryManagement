@@ -13,10 +13,10 @@ class UsersController < ApplicationController
   def destroy
 
     User.find(params[:id]).destroy
-    flash[:success]="User destroyed."
+#    flash[:success]="User destroyed."
 
     respond_to do |format|
-      format.html { redirect_to(users_url) }
+      format.html { redirect_to(users_url,:notice =>"User destroyed") }
       format.js
     end
 
